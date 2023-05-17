@@ -285,13 +285,15 @@ const productCategoryController = async (req, res) => {
 }
 
 const checkoutController = async (req, res) => {
+  
+  // console.log(totalPrice, address, phone, token, products, auth);
   try{
-    const { address, products, auth, token} = req.body;
+    const { name, phone, address, totalPrice, token, products, auth} = req.body;
 
-    let totalPrice = 0
-    products.map(product => {
-      totalPrice += product.price
-    })
+    // let totalPrice = 0
+    // products.map(product => {
+    //   totalPrice += product.price
+    // })
 
     const decode = jwt.verify(
       auth.token,
@@ -303,10 +305,12 @@ const checkoutController = async (req, res) => {
 
     // req.user = decode;
     const order = new orderModel({
+      name,
       products,
+      phone,
+      address,
       payment: totalPrice,
       buyer: user,
-      address
     }).save()
 
     res.status(200).send({

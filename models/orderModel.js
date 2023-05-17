@@ -10,6 +10,10 @@ const orderSchema = new Schema(
         required: true,
       },
     ],
+    name: {
+        type: String,
+        required: true,
+    },
     payment: {
         type: Number,
         required: true,
@@ -24,7 +28,7 @@ const orderSchema = new Schema(
       enum: ['Not Process', 'Processing', 'Shipped', 'deliverd', 'cancel']
     },
     address: {
-      type: String
+      type: []
     },
   },
   { timestamps: true }
